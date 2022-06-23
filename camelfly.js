@@ -44,7 +44,7 @@ CF.process = function () {
 }
 
 // Get sections of different types
-// Like title, single, list
+// Like, single, list, image, link
 CF.get_sections = function (lines) {
   let sections = []
   let level = 0
@@ -59,8 +59,6 @@ CF.get_sections = function (lines) {
         sections.push(section)
         current_section = section
         level = 1
-      } else if (CF.all_caps(line)) {
-        sections.push({type: "title", text: line})
       } else if (url_parts.type === "image") {
         sections.push({type: "image", url: url_parts.url})
       } else if (url_parts.type === "link") {
@@ -86,7 +84,7 @@ CF.generate_markdown = function (sections) {
 
   for (let section of sections) {
     if (section.type === "list") {
-      md += `### ${section.text}\n\n`
+      md += `${section.text}\n\n`
       
       for (let item of section.items) {
         md += `* ${item}\n`
@@ -97,10 +95,6 @@ CF.generate_markdown = function (sections) {
     
     else if (section.type === "single") {
       md += `${section.text}\n\n---\n\n`
-    } 
-    
-    else if (section.type === "title") {
-      md += `## ${CF.capitalize(section.text)}\n\n---\n\n`
     } 
     
     else if (section.type === "image") {
@@ -118,11 +112,6 @@ CF.generate_markdown = function (sections) {
 // Save a file to a path
 CF.save_file = function (path, data) {
   fs.writeFileSync(path, data, "utf-8")
-}
-
-// Util: Check if a text only has capital letters
-CF.all_caps = function (s) {
-  return !s.split("").some(x => x.toUpperCase() !== x)
 }
 
 // Util: Capitalize all the words in a string

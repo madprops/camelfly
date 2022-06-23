@@ -1,4 +1,4 @@
-## Camelfly
+## Camelfy
 
 ---
 
@@ -10,7 +10,7 @@ Check readme.cf
 
 ---
 
-### Write lists like this:
+Write lists like this:
 
 * First item
 * Second item
