@@ -93,13 +93,21 @@ CF.generate_markdown = function (sections) {
       }
   
       md += "\n---\n\n"
-    } else if (section.type === "single") {
+    } 
+    
+    else if (section.type === "single") {
       md += `${section.text}\n\n---\n\n`
-    } else if (section.type === "title") {
+    } 
+    
+    else if (section.type === "title") {
       md += `## ${CF.capitalize(section.text)}\n\n---\n\n`
-    } else if (section.type === "image") {
+    } 
+    
+    else if (section.type === "image") {
       md += `![](${section.url})\n\n---\n\n`
-    } else if (section.type === "link") {
+    } 
+    
+    else if (section.type === "link") {
       md += `[${section.text}](${section.url})\n\n---\n\n`
     }
   }
