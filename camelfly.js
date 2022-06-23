@@ -76,21 +76,21 @@ CF.generate_markdown = function (sections) {
 
   for (let section of sections) {
     if (section.type === "list") {
-      md += `### ${section.text}\n`
+      md += `### ${section.text}\n\n`
       
       for (let item of section.items) {
         md += `* ${item}\n`
       }
   
-      md += "\n --- \n\n"
+      md += "\n---\n\n"
     } else if (section.type === "single") {
-      md += `### ${section.text}\n\n --- \n\n`
+      md += `### ${section.text}\n\n---\n\n`
     } else if (section.type === "title") {
-      md += `## ${CF.capitalize(section.text)}\n\n --- \n\n`
+      md += `## ${CF.capitalize(section.text)}\n\n---\n\n`
     } else if (section.type === "image") {
-      md += `![](${section.url})\n`
+      md += `![](${section.url})\n\n---\n\n`
     } else if (section.type === "link") {
-      md += `[${section.text}](${section.url})\n`
+      md += `[${section.text}](${section.url})\n\n---\n\n`
     }
   }
 
