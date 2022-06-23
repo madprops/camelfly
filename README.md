@@ -1,30 +1,24 @@
-## CAMELFLY
+## Camelfly
 
  --- 
 
-### some sentence
-* first line
-* second line
-* third line
+![](https://i.imgur.com/0wmi9Jy.jpg)
+### Check readme.cf
 
  --- 
 
-### some single line
+### Write lists like this
+* First item
+* Second item
+* Third item
 
  --- 
 
-### some other singe line
+### Write single lines
 
  --- 
 
-### some other sentence
-* first line!
-* second line!
-* third line!
-
- --- 
-
-### a final single line
+### This is meant mostly for me to write changelogs for releases of stuff
 
  --- 
 

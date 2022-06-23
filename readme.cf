@@ -1,19 +1,15 @@
 CAMELFLY
 
-some sentence {
-  first line
-  second line
-  third line
+https://i.imgur.com/0wmi9Jy.jpg
+
+Check readme.cf
+
+Write lists like this {
+  First item
+  Second item
+  Third item
 }
 
-some single line
+Write single lines
 
-some other singe line
-
-some other sentence {
-  first line!
-  second line!
-  third line!
-}
-
-a final single line
+This is meant mostly for me to write changelogs for releases of stuff

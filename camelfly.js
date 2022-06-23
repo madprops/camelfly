@@ -48,6 +48,13 @@ CF.get_sections = function (lines) {
         level = 1
       } else if (CF.all_caps(line)) {
         sections.push({type: "title", text: line})
+      } else if (CF.is_image(line)) {
+        let split = line.split(" ").map(x => x.trim())
+        sections.push({type: "image", url: split[0]})
+      } else if (CF.is_link(line)) {
+        let split = line.split(" ").map(x => x.trim())
+        let text = split.slice(1).join(" ")
+        sections.push({type: "link", url: split[0], text: text})
       } else {
         sections.push({type: "single", text: line})
       }
@@ -79,13 +86,11 @@ CF.generate_markdown = function (sections) {
     } else if (section.type === "single") {
       md += `### ${section.text}\n\n --- \n\n`
     } else if (section.type === "title") {
-      let title = section.text
-      
-      if (section.text.split(" ").length > 1) {
-        title = CF.capitalize(section.text)
-      }
-      
-      md += `## ${title}\n\n --- \n\n`
+      md += `## ${CF.capitalize(section.text)}\n\n --- \n\n`
+    } else if (section.type === "image") {
+      md += `![](${section.url})\n`
+    } else if (section.type === "link") {
+      md += `[${section.text}](${section.url})\n`
     }
   }
 
@@ -110,6 +115,26 @@ CF.capitalize = function (s) {
     .join(" ")
 
   return ns
+}
+
+// Util: Check if it's an image url
+CF.is_image = function (s) {
+  if (s.startsWith("http")) {
+    let exts = [".jpg", ".png", ".gif"]
+
+    for (let ext of exts) {
+      if (s.endsWith(ext)) {
+        return true
+      }
+    }
+  }
+
+  return false
+}
+
+// Util: Check if it's a url
+CF.is_link = function (s) {
+  return s.startsWith("http")
 }
 
 // Start here
