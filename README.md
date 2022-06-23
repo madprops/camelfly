@@ -6,7 +6,7 @@
 
 ---
 
-### Check readme.cf
+Check readme.cf
 
 ---
 
@@ -18,19 +18,19 @@
 
 ---
 
-### Write single lines
+Write single lines
 
 ---
 
-### This is meant mostly for me to write changelogs for releases of stuff
+This is meant mostly for me to write changelogs for releases of stuff
 
 ---
 
-### Either pass an input file and output file
+Either pass an input file and output file
 
 ---
 
-### Or an output file only to use the clipboard as input
+Or an output file only to use the clipboard as input
 
 ---
 

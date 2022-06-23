@@ -94,7 +94,7 @@ CF.generate_markdown = function (sections) {
   
       md += "\n---\n\n"
     } else if (section.type === "single") {
-      md += `### ${section.text}\n\n---\n\n`
+      md += `${section.text}\n\n---\n\n`
     } else if (section.type === "title") {
       md += `## ${CF.capitalize(section.text)}\n\n---\n\n`
     } else if (section.type === "image") {
