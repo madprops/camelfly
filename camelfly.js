@@ -1,4 +1,6 @@
+const { execSync } = require("child_process")
 const fs = require("fs")
+const exec = require("child_process").execSync
 
 // Main object that holds everything
 const CF = {}
@@ -11,14 +13,23 @@ CF.main = function () {
 
 // Get input and output paths
 CF.get_args = function () {
-  CF.input = process.argv.slice(2)[0]
-  CF.output = process.argv.slice(2)[1]
+  let args = process.argv.slice(2)
   
-  if (!CF.input || !CF.output) {
-    return
-  }
+  if (args[0] && args[1]) {
+    CF.input = fs.readFileSync(args[0], "utf-8")
+    CF.output = args[1]
+  } else if (args[0]) {
+    let clipboard = execSync("xclip -o -sel clip", { encoding: "utf-8" })
 
-  CF.input = fs.readFileSync(CF.input, "utf-8")
+    if (!clipboard) {
+      exit(0)
+    }
+    
+    CF.input = clipboard
+    CF.output = args[0]
+  } else {
+    exit(0)
+  }
 }
 
 // Main processing function
@@ -40,6 +51,8 @@ CF.get_sections = function (lines) {
   let current_section
 
   for (let line of lines) {
+    let url_parts = CF.get_url_parts(line)
+
     if (level === 0) {
       if (line.endsWith("{")) {
         let section = {type: "list", text: line.replace("{", "").trim(), items: []}
@@ -48,13 +61,10 @@ CF.get_sections = function (lines) {
         level = 1
       } else if (CF.all_caps(line)) {
         sections.push({type: "title", text: line})
-      } else if (CF.is_image(line)) {
-        let split = line.split(" ").map(x => x.trim())
-        sections.push({type: "image", url: split[0]})
-      } else if (CF.is_link(line)) {
-        let split = line.split(" ").map(x => x.trim())
-        let text = split.slice(1).join(" ")
-        sections.push({type: "link", url: split[0], text: text})
+      } else if (url_parts.type === "image") {
+        sections.push({type: "image", url: url_parts.url})
+      } else if (url_parts.type === "link") {
+        sections.push({type: "link", url: url_parts.url, text: url_parts.text})
       } else {
         sections.push({type: "single", text: line})
       }
@@ -135,6 +145,33 @@ CF.is_image = function (s) {
 // Util: Check if it's a url
 CF.is_link = function (s) {
   return s.startsWith("http")
+}
+
+// Util: Get url and text parts
+CF.get_url_parts = function (s) {
+  let type = ""
+  let url = ""
+  let text = []
+
+  let split = s.split(" ").map(x => x.trim())
+
+  for (let item of split) {
+    if (CF.is_image(item)) {
+      url = item
+      type = "image"
+    } else if (CF.is_link(item)) {
+      url = item
+      type = "link"
+    } else {
+      text.push(item)
+    }
+  }
+
+  return {
+    type: type,
+    url: url,
+    text: text.join(" ")
+  }
 }
 
 // Start here
