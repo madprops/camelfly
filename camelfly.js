@@ -114,16 +114,6 @@ CF.save_file = function (path, data) {
   fs.writeFileSync(path, data, "utf-8")
 }
 
-// Util: Capitalize all the words in a string
-CF.capitalize = function (s) {
-  let ns = s.toLowerCase()
-    .split(" ")
-    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(" ")
-
-  return ns
-}
-
 // Util: Check if it's an image url
 CF.is_image = function (s) {
   if (s.startsWith("http")) {
