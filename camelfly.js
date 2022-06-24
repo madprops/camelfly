@@ -60,7 +60,7 @@ CF.get_sections = function (lines) {
         current_section = section
         level = 1
       } else if (url_parts.type === "image") {
-        sections.push({type: "image", url: url_parts.url})
+        sections.push({type: "image", url: url_parts.url, text: url_parts.text})
       } else if (url_parts.type === "link") {
         sections.push({type: "link", url: url_parts.url, text: url_parts.text})
       } else {
@@ -98,7 +98,7 @@ CF.generate_markdown = function (sections) {
     } 
     
     else if (section.type === "image") {
-      md += `![](${section.url})\n\n`
+      md += `<img src="${section.url}" width="${section.text}">\n\n`
     } 
     
     else if (section.type === "link") {

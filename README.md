@@ -1,6 +1,6 @@
 # Camelfy
 
-![](https://i.imgur.com/qpTh2P5.jpg)
+<img src="https://i.imgur.com/qpTh2P5.jpg" width="200">
 
 Write lists like this:
 
