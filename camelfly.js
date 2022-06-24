@@ -97,8 +97,6 @@ CF.generate_markdown = function (sections) {
       for (let item of section.items) {
         md += `* ${item}\n`
       }
-  
-      md += "\n"
     } 
     
     else if (section.type === "single") {
