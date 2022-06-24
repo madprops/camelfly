@@ -90,19 +90,19 @@ CF.generate_markdown = function (sections) {
         md += `* ${item}\n`
       }
   
-      md += "\n---\n\n"
+      md += "\n"
     } 
     
     else if (section.type === "single") {
-      md += `${section.text}\n\n---\n\n`
+      md += `${section.text}\n\n`
     } 
     
     else if (section.type === "image") {
-      md += `![](${section.url})\n\n---\n\n`
+      md += `![](${section.url})\n\n`
     } 
     
     else if (section.type === "link") {
-      md += `[${section.text}](${section.url})\n\n---\n\n`
+      md += `[${section.text}](${section.url})\n\n`
     }
   }
 

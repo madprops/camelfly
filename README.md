@@ -1,14 +1,6 @@
-#Camelfy
+# Camelfy
 
----
-
-![](https://i.imgur.com/4uuap0C.jpg)
-
----
-
-Check readme.cf
-
----
+![](https://i.imgur.com/sRKI6DA.jpg)
 
 Write lists like this:
 
@@ -16,29 +8,13 @@ Write lists like this:
 * Second item
 * Third item
 
----
-
 Write single lines
-
----
-
-This is meant mostly for me to write changelogs for releases of stuff
-
----
 
 Either pass an input file and output file
 
----
-
 Or an output file only to use the clipboard as input
-
----
 
 [This is a link](https://github.com/madprops/camelfly)
 
----
-
 [This is the same link](https://github.com/madprops/camelfly)
-
----
 
