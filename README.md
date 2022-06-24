@@ -2,7 +2,7 @@
 
 <img src="https://i.imgur.com/qpTh2P5.jpg" width="200">
 
-### Write lists like this:
+Write lists like this:
 * First item
 * Second item
 * Third item

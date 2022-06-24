@@ -92,7 +92,7 @@ CF.generate_markdown = function (sections) {
 
   for (let section of sections) {
     if (section.type === "list") {
-      md += `### ${section.text}\n`
+      md += `${section.text}\n`
       
       for (let item of section.items) {
         md += `* ${item}\n`
