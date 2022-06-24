@@ -1,6 +1,6 @@
 const { execSync } = require("child_process")
 const fs = require("fs")
-const exec = require("child_process").execSync
+const open = require("open")
 
 // Main object that holds everything
 const CF = {}
@@ -18,7 +18,7 @@ CF.get_args = function () {
   if (args[0] && args[1]) {
     CF.input = fs.readFileSync(args[0], "utf-8")
     CF.output = args[1]
-  } else if (args[0]) {
+  } else {
     let clipboard = execSync("xclip -o -sel clip", { encoding: "utf-8" })
 
     if (!clipboard) {
@@ -26,9 +26,7 @@ CF.get_args = function () {
     }
     
     CF.input = clipboard
-    CF.output = args[0]
-  } else {
-    exit(0)
+    CF.output = args[0] || "$editor"
   }
 }
 
@@ -106,12 +104,17 @@ CF.generate_markdown = function (sections) {
     }
   }
 
-  return md
+  return md.trim()
 }
 
 // Save a file to a path
 CF.save_file = function (path, data) {
-  fs.writeFileSync(path, data, "utf-8")
+  if (path === "$editor") {
+    fs.writeFileSync("/tmp/camelfly_output", data, "utf-8")
+    open("//tmp/camelfly_output")
+  } else {
+    fs.writeFileSync(path, data, "utf-8")
+  }
 }
 
 // Util: Check if it's an image url
