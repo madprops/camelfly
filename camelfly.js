@@ -149,7 +149,7 @@ CF.get_url_parts = function (s) {
   let url = ""
   let text = []
 
-  let split = s.split(" ").map(x => x.trim())
+  let split = s.split(" ").map(x => x.trim()).filter(x => x !== "")
 
   for (let item of split) {
     if (CF.is_image(item)) {
