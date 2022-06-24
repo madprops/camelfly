@@ -52,8 +52,9 @@ CF.get_sections = function (lines) {
     let url_parts = CF.get_url_parts(line)
 
     if (level === 0) {
-      if (line.endsWith("{")) {
-        let section = {type: "list", text: line.replace("{", "").trim(), items: []}
+      if (line.endsWith("{") || line.endsWith("[")) {
+        let type = line.endsWith("{") ? "bulletlist" : "numberlist"
+        let section = {type: type, text: line.slice(0, -1), items: []}
         sections.push(section)
         current_section = section
         level = 1
@@ -75,10 +76,10 @@ CF.get_sections = function (lines) {
         sections.push({type: "single", text: line})
       }
     } else if (level === 1) {
-      if (line.trim() === "}") {
+      if (line === "}" || line === "]") {
         level = 0
       } else {
-        current_section.items.push(line.trim())
+        current_section.items.push(line)
       }
     }
   }
@@ -91,11 +92,17 @@ CF.generate_markdown = function (sections) {
   let md = ""
 
   for (let section of sections) {
-    if (section.type === "list") {
+    if (section.type === "bulletlist" || section.type === "numberlist") {
       md += `${section.text}\n`
       
-      for (let item of section.items) {
-        md += `* ${item}\n`
+      if (section.type === "bulletlist") {
+        for (let item of section.items) {
+          md += `* ${item}\n`
+        }
+      } else {
+        for (let item of section.items) {
+          md += `1. ${item}\n`
+        }
       }
     } 
     

@@ -2,11 +2,17 @@
 
 https://i.imgur.com/qpTh2P5.jpg 200
 
-Write lists like this: {
+Write bullet lists: {
   First item
   Second item
   Third item
 }
+
+Write number lists: [
+  First item
+  Second item
+  Third item
+]
 
 Write single lines
 Either pass an input file and output file
