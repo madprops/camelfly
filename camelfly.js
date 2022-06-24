@@ -33,7 +33,7 @@ CF.get_args = function () {
 // Main processing function
 CF.process = function () {
   // Get lines and remove multiple linebreaks
-  let lines = CF.input.split("\n").map(x => x.trim()).filter(x => x !== "")
+  let lines = CF.input.split("\n").map(x => x.trim())
   
   let sections = CF.get_sections(lines)
   let markdown = CF.generate_markdown(sections)
@@ -66,6 +66,10 @@ CF.get_sections = function (lines) {
       else if (url_parts.type === "link") {
         sections.push({type: "link", url: url_parts.url, text: url_parts.text})
       } 
+
+      else if (line === "") {
+        sections.push({type: "space"})
+      }
       
       else {
         sections.push({type: "single", text: line})
@@ -88,7 +92,7 @@ CF.generate_markdown = function (sections) {
 
   for (let section of sections) {
     if (section.type === "list") {
-      md += `${section.text}\n\n`
+      md += `### ${section.text}\n`
       
       for (let item of section.items) {
         md += `* ${item}\n`
@@ -98,15 +102,19 @@ CF.generate_markdown = function (sections) {
     } 
     
     else if (section.type === "single") {
-      md += `${section.text}\n\n`
+      md += `${section.text}  \n`
     } 
     
     else if (section.type === "image") {
-      md += `<img src="${section.url}" width="${section.text}">\n\n`
+      md += `<img src="${section.url}" width="${section.text}">\n`
     } 
     
     else if (section.type === "link") {
-      md += `[${section.text}](${section.url})\n\n`
+      md += `[${section.text}](${section.url})  \n`
+    }
+
+    else if (section.type === "space") {
+      md += "\n"
     }
   }
 
