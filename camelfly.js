@@ -57,11 +57,17 @@ CF.get_sections = function (lines) {
         sections.push(section)
         current_section = section
         level = 1
-      } else if (url_parts.type === "image") {
+      } 
+      
+      else if (url_parts.type === "image") {
         sections.push({type: "image", url: url_parts.url, text: url_parts.text})
-      } else if (url_parts.type === "link") {
+      } 
+      
+      else if (url_parts.type === "link") {
         sections.push({type: "link", url: url_parts.url, text: url_parts.text})
-      } else {
+      } 
+      
+      else {
         sections.push({type: "single", text: line})
       }
     } else if (level === 1) {
