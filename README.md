@@ -12,5 +12,4 @@ Either pass an input file and output file
 Or an output file only to use the clipboard as input  
 Send nothing and it will use the clipboard and open a text editor  
 
-[This is a link](https://link.com)  
-[This is the same link](https://link.com)
+[Source of this Readme](https://github.com/madprops/camelfly/blob/main/camelfly.js)
