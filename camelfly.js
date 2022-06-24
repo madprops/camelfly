@@ -111,7 +111,7 @@ CF.generate_markdown = function (sections) {
 CF.save_file = function (path, data) {
   if (path === "$editor") {
     fs.writeFileSync("/tmp/camelfly_output", data, "utf-8")
-    open("//tmp/camelfly_output")
+    open("/tmp/camelfly_output")
   } else {
     fs.writeFileSync(path, data, "utf-8")
   }
